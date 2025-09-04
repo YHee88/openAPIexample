@@ -1,4 +1,4 @@
-
+/*
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -59,4 +59,54 @@ const App=()=>{
     </stateContext.Provider>
   )
 }
+export default App;
+*/
+
+import React from "react";
+import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Home from "./pages/Home";
+
+
+
+
+
+const url='http://localhost:8080/api/board/list';
+export const BoardStateContext = React.createContext();
+
+const App = () =>{
+  const [isDataLoaded, setIsDataLoaded]= useState(false);
+  const [result, setResult] = useState([]);
+
+  useEffect(()=>{
+    fetch(url)
+    .then(response => response.json())
+    .then(data=>{
+      setResult(data);
+      setIsDataLoaded(true);
+    })
+    .catch(error => console.log(error));
+  },[]);
+  
+  if(!isDataLoaded){
+    return <div>데이터를 불러오는 중입니다..</div>
+  }
+  else {
+    return(
+      <>
+        <BoardStateContext.Provider value={result}>
+          <Routes>
+            <Route path='/' element={<Home />} />
+
+          </Routes>
+        </BoardStateContext.Provider>
+      </>
+    );
+  }
+
+
+};
+
 export default App;

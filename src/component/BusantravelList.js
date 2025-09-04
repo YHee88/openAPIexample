@@ -3,7 +3,7 @@ import { stateContext } from "../App"
 import { Table } from "react-bootstrap";
 import BusantravelItem from './BusantravelItem';
 
-
+/*
 const BusantravelList=()=>{
     const result = useContext(stateContext);
 
@@ -31,3 +31,5 @@ const BusantravelList=()=>{
 }
 
 export default BusantravelList;
+
+*/
